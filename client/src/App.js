@@ -1,11 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+import {  Routes, Route } from 'react-router-dom';
+import SignupComponent from './Components/SignupComponent';
+
+const Home = () => <div>Home</div>;
 
 function App() {
   return (
-    <div className="App">
-    main page
-    </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/signup" element={<SignupComponent />} />
+      </Routes>
   );
 }
 

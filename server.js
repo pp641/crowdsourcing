@@ -1,10 +1,12 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const authRouter = require('../crowdsourcing/routes/authRoutes');
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 const mongoURI = process.env.NODE_ENV === 'production' ? process.env.MONGO_URI_PROD : process.env.MONGO_URI_LOCAL;
+app.use(cors());
 app.use(express.json());
 
 mongoose.connect(mongoURI, {
