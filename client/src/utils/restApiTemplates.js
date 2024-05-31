@@ -30,6 +30,7 @@ export const getData = async (endpoint, params = {}) => {
     } catch (error) {
       console.error('POST request error:', error);
       throw error;
+      return;
     }
   };
 
