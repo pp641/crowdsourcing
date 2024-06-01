@@ -23,9 +23,14 @@ export const getData = async (endpoint, params = {}) => {
   };
 
   
-  export const postData = async (endpoint, body = {}) => {
+  export const postData = async (endpoint, body = {} , token= '') => {
     try {
-      const response = await baseApi.post(endpoint, body);
+      const response = await baseApi.post(endpoint, body, {
+        headers:{
+          'Content-Type' : 'application/json',
+          'Authorization': 'Bearer ' + token
+        }
+      });
       return response;
     } catch (error) {
       console.error('POST request error:', error);

@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Autocomplete from "@mui/material/Autocomplete";
 import AddIcon from "@mui/icons-material/Add";
+import { postData } from "../utils/restApiTemplates";
 
 const useStyles = makeStyles((theme) => ({
   textField: {
@@ -89,6 +90,8 @@ const ProjectAdditionComponent = () => {
       projectData.status = selectedStatus;
       projectData.links = links;
       setProjectData(projectData);
+      const result = await postData('/api/createProject',projectData , localStorage.getItem('token'));
+      console.log("ok", result.data);
     } catch (error) {
       console.error("Login failed:", error);
     }

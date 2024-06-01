@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const projectSchema = new mongoose.Schema({
   creator: {
     type: mongoose.Schema.Types.ObjectId,
@@ -8,15 +7,35 @@ const projectSchema = new mongoose.Schema({
   },
   title: {
     type: String,
-    required: true
+    required: true,
+    trim: true,
+    minlength: 5,
+    maxlength: 100
   },
   description: {
     type: String,
-    required: true
+    required: true,
+    trim: true,
+    minlength: 10,
+    maxlength: 1000
   },
+  category: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  links: [{
+    type: String,
+    trim: true,
+    validate: {
+      validator: function(v) {
+        return /^https?:\/\/\S+$/.test(v); 
+      },
+      message: props => `${props.value} is not a valid URL!`
+    }
+  }],
   status: {
     type: String,
-    enum: ['active', 'funded', 'inactive'],
     default: 'active'
   },
   createdAt: {

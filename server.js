@@ -4,6 +4,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const authRouter = require('../crowdsourcing/routes/authRoutes');
+const projectRouter =  require('../crowdsourcing/routes/ProjectRoutes');
 const port = process.env.PORT || 5000;
 const mongoURI = process.env.NODE_ENV === 'production' ? process.env.MONGO_URI_PROD : process.env.MONGO_URI_LOCAL;
 app.use(cors());
@@ -18,6 +19,7 @@ mongoose.connect(mongoURI, {
 
 
 app.use('/api', authRouter);
+app.use('/api', projectRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
