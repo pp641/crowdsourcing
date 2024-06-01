@@ -18,6 +18,19 @@ const investmentSchema = new mongoose.Schema({
   investedAt: {
     type: Date,
     default: Date.now
+  },
+  status: {
+    type: String,
+    // enum: ['Pending', 'Raised', 'Failed'],
+    default: 'Pending'
+  },
+  amountCollected: {
+    type: Number,
+    default: 0
+  },
+  startedAt: {
+    type: Date,
+    default: Date.now
   }
 });
 
