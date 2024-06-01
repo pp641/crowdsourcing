@@ -4,10 +4,12 @@ import { Box, Button, IconButton, InputAdornment, TextField, Tooltip } from '@mu
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { LoginUser, registerUser } from '../Redux/ActionDetails/AuthAction';
+import { useNavigate } from 'react-router-dom';
 
 const SigninComponent = () => {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const  {auth}  =  useSelector((state) => state);
 
@@ -24,6 +26,10 @@ const SigninComponent = () => {
         e.preventDefault();
         try {
           const result =  await dispatch(LoginUser(formData));
+          console.log("okfront", result);
+          if(result.token !== undefined && result.userId !== undefined ){
+                    navigate("/")
+          }
           if (result) {
             setFormData({
               email : "",

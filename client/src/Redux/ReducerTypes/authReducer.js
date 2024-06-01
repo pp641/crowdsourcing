@@ -32,7 +32,7 @@ import {
       case LOGIN_SUCCESS:
         return {
           ...state,
-          user: action.payload.user,  
+          user: action.payload.userId,  
           isAuthenticated: true,
           loading: false,
         };
