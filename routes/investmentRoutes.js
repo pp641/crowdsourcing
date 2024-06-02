@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const InvestmentModel =  require('../models/investmentModel');
 const InvestmentController = require('../controllers/fundingController');
 const { isLoggedIn } = require('../middlewares/isLoggedIn');
 

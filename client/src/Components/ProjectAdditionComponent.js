@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import Autocomplete from "@mui/material/Autocomplete";
 import AddIcon from "@mui/icons-material/Add";
 import { postData } from "../utils/restApiTemplates";
+import { createNewProject } from "../Redux/ActionDetails/ProjectAction";
 
 const useStyles = makeStyles((theme) => ({
   textField: {
@@ -24,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProjectAdditionComponent = () => {
+  const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -90,8 +92,20 @@ const ProjectAdditionComponent = () => {
       projectData.status = selectedStatus;
       projectData.links = links;
       setProjectData(projectData);
-      const result = await postData('/api/createProject',projectData , localStorage.getItem('token'));
-      console.log("ok", result.data);
+      const result =   await dispatch( createNewProject(projectData,token))
+
+      if(result.status === 201 || result.status === 200){
+            setProjectData({
+                title: "",
+                description: "",
+                category: "",
+                links: [],
+                status: "",
+            });
+            navigate("/")
+      }
+
+      console.log("ok", result);
     } catch (error) {
       console.error("Login failed:", error);
     }

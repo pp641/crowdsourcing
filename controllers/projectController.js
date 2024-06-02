@@ -3,6 +3,7 @@ const Project = require('../models/projectModel');
 // Create a new project
 const createProject = async (req, res) => {
   try {
+    console.log("reqq", req.body)
     const { title, description, category, links, status } = req.body;
     const creator = req.user.userId;
     if (!creator || !title || !description || !category) {

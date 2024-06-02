@@ -9,10 +9,12 @@ import {
     UPDATE_SINGLE_PROJECT_FAILED,
     DELETE_SINGLE_PROJECT_SUCCESS,
     DELETE_SINGLE_PROJECT_FAILED,
+    GET_ALL_PROJECTS_BY_USER,
   } from '../ActionTypes/ProjectActionTypes';
   
   const initialState = {
     projects: [],
+    projectsByUser: [],
     project: null,
     loading: false,
     error: null,
@@ -33,6 +35,13 @@ import {
           loading: false,
           error: action.payload,
         };
+      case GET_ALL_PROJECTS_BY_USER:
+        return{
+            ...state,
+            projectsByUser: action.payload,
+            loading: false,
+            error: null,
+          };
       case GET_ALL_PROJECTS_SUCCESS:
         return {
           ...state,

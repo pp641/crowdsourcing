@@ -9,6 +9,7 @@ export const getData = async (endpoint, params = {}, token = '') => {
         'Authorization': `Bearer ${token}`,
       },
     });
+    console.log("oks", response);
     return response;
   } catch (error) {
     console.error('GET request error:', error);
