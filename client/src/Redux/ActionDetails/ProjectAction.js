@@ -25,7 +25,7 @@ export const createNewProject = (project, token) => async (dispatch) => {
 
 export const getAllProjects = (token) => async (dispatch) => {
   try {
-    const data = (await getData("/projects", {}, token));
+    const data = await getData("/api/getAllProjects", {}, token);
     dispatch({ type: GET_ALL_PROJECTS_SUCCESS, payload: data.data });
     return data;
   } catch (error) {
@@ -35,7 +35,7 @@ export const getAllProjects = (token) => async (dispatch) => {
 
 export const getSingleProject = (id, token) => async (dispatch) => {
   try {
-    const data = await getDataById("/projects", id, token)
+    const data = await getDataById("/api/project", id, token)
     dispatch({ type: GET_SINGLE_PROJECT_SUCCESS, payload: data.data });
     return data;
   } catch (error) {
@@ -45,7 +45,7 @@ export const getSingleProject = (id, token) => async (dispatch) => {
 
 export const updateSingleProject = (id, project, token) => async (dispatch) => {
   try {
-    const data = await putData("/projects", id, project, token).data;
+    const data = await putData("/api/projects", id, project, token).data;
     dispatch({ type: UPDATE_SINGLE_PROJECT_SUCCESS, payload: data });
     return data;
   } catch (error) {

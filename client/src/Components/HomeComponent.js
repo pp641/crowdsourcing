@@ -13,16 +13,13 @@ const HomeComponent = () => {
     <div>
       {token ? (
         <>
-          <NavigationBarPrivate />
           <HomeContentPrivate />
         </>
       ) : (
         <>
-          <NavigatonBarPublic />
           <HomePageContentPublic />
         </>
       )}
-      <FooterComponent/>
     </div>
   );
 };

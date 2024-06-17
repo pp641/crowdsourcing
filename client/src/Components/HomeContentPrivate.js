@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProjectsByUser } from "../Redux/ActionDetails/ProjectAction";
+import { getAllProjects, getAllProjectsByUser } from "../Redux/ActionDetails/ProjectAction";
 import ProjectCard from "./ProjectViewComponent";
 
 const HomeContentPrivate = () => {
@@ -12,11 +12,11 @@ const HomeContentPrivate = () => {
   const [allMyProjects, setAllMyProjects] = useState([]);
 
   useEffect(() => {
-    dispatch(getAllProjectsByUser(userId, token));
-  }, [dispatch, userId, token]);
+    dispatch(getAllProjects(token));
+  }, [dispatch,  token]);
 
   useEffect(() => {
-    setAllMyProjects(project.projectsByUser || []);
+    setAllMyProjects(project.projects || []);
   }, [project]);
 
   return (

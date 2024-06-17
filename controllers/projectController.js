@@ -41,6 +41,7 @@ const getAllProjects = async (req, res) => {
 const getSingleProject = async (req, res) => {
   try {
     const project = await Project.findById(req.params.id);
+    console.log("idd", req.params);
     if (!project) {
       return res.status(404).json({ message: 'Project not found.' });
     }

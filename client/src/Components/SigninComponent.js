@@ -29,6 +29,7 @@ const SigninComponent = () => {
           console.log("okfront", result);
           if(result.token !== undefined && result.userId !== undefined ){
                     navigate("/")
+                    window.location.reload();
           }
           if (result) {
             setFormData({

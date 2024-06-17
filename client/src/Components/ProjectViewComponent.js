@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardContent, CardActions, Typography, Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
@@ -15,9 +16,16 @@ const useStyles = makeStyles({
   },
 });
 
-const ProjectCard = ( {project}  ) => {
+const ProjectCard = ({ project }) => {
   const classes = useStyles();
-    console.log("oktest", project)
+  const navigate = useNavigate();
+
+  const userId = localStorage.getItem('userId');
+
+  const openProjectView = () => {
+    navigate(`/project/${project._id}`)
+  }
+
   return (
     <Card className={classes.root}>
       <CardContent>
@@ -35,7 +43,7 @@ const ProjectCard = ( {project}  ) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Open for Funding</Button>
+        <Button  onClick={openProjectView}  size="mid" color='warning' variant='contained'>View Project</Button>
       </CardActions>
     </Card>
   );
