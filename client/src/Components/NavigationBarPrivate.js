@@ -1,26 +1,3 @@
-// import { Button } from '@mui/material';
-// import React from 'react'
-// import { useNavigate } from 'react-router-dom'
-
-// const NavigationBarPrivate = () => {
-//     const navigate = useNavigate();
-
-//     const navigateToProfile = () =>{
-//         const userId = localStorage.getItem('userId');
-//         navigate(`/profile/${userId}`);
-//     }
-
-//   return (
-//     <div>
-//         <div>navigation bar private</div>
-//         <Button variant='contained' color='error'
-//             onClick = {navigateToProfile}
-//         >Profile</Button>
-//     </div>
-//   )
-// }
-
-// export default NavigationBarPrivate
 
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
@@ -60,7 +37,11 @@ function ResponsiveAppBar() {
     const actions = {
         "Home": () => navigate("/"),
         "Projects": () => navigate("/projects"),
-        "Developers": () => navigate("/developers"),
+        "Developers": () => {
+          navigate("/developers");
+          
+        
+        },
         "Investors": () => {
             navigate("/investors");
             window.location.reload();
