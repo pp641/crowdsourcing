@@ -92,8 +92,8 @@ const ProjectAdditionComponent = () => {
       projectData.status = selectedStatus;
       projectData.links = links;
       setProjectData(projectData);
-      const result =   await dispatch( createNewProject(projectData,token))
-
+      const result =   await dispatch(createNewProject(projectData,token))
+      console.log("okd", result)
       if(result.status === 201 || result.status === 200){
             setProjectData({
                 title: "",

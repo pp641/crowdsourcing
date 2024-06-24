@@ -3,11 +3,13 @@ import {
     GET_ALL_DEVELOPERS_FAILED,
     GET_CURRENT_CHAT_USER_WISE,
     GET_ALL_CHATS_USER_WISE,
-    GET_ALL_CHATS_USER_WISE_FAILED
+    GET_ALL_CHATS_USER_WISE_FAILED,
+    GET_ALL_INVESTORS
 } from '../ActionTypes/UserActionTypes'
 
 const initialState = {
     developers : [],
+    investors : [],
     error : null,
     chatBetweenTwoUsers : [],
     currentChat : {},
@@ -22,6 +24,12 @@ const userReducer = (state = initialState , action) => {
                 developers : action.payload,
                 error : null
             };
+        case GET_ALL_INVESTORS:
+            return{
+                ...state ,
+                investors: action.payload,
+                error: null
+            }
         case GET_ALL_DEVELOPERS_FAILED:
             return {
                 ...state,

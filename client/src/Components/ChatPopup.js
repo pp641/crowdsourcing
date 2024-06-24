@@ -13,6 +13,7 @@ import io from 'socket.io-client';
     const [otherUserId, setOtherUserId] = useState(user._id);
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
+    const [currentMessage , setCurrentMessage] = useState("");
     const userState = useSelector(state => state).user
     const {chatBetweenTwoUsers} = userState;
 

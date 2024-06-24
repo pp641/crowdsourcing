@@ -12,6 +12,17 @@ const getAllDevelopers = async (req,res)=>{
     }
 }
 
+const getAllInvestors = async (req,res) => {
+    try {
+        console.log("ok gettt")
+        const investors = await User.find({ backedProjects: { $exists: true, $ne: [] } })
+        res.status(200).json(investors)
+    } catch(error){
+        console.error(error);
+        res.status(500).json({message : 'Server Error . Please Try again later'})
+    }
+}
+
 
 const getAllChats = async (req, res) => {
     try {
@@ -32,4 +43,6 @@ const getAllChats = async (req, res) => {
 }
 
 
-module.exports = {getAllDevelopers, getAllChats}
+
+
+module.exports = {getAllDevelopers, getAllChats , getAllInvestors}

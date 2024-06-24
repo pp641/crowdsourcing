@@ -57,7 +57,7 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = (setting) => {
     const actions = {
         "Profile": () => navigate(`/profile/${userId}`),
-        "My Projects": () => navigate("/projects"),
+        "My Projects": () => navigate("/myprojects"),
         "My Investments": () => navigate("/investments"),
         "Logout": () => {
             localStorage.removeItem('token');
