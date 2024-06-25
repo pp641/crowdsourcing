@@ -1,53 +1,64 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getAllDevelopers } from '../Redux/ActionDetails/UserActions'
-import ChatPopup from './ChatPopup'
-import { TextField, Button, Container, Box } from '@mui/material';
-import  Usercard  from "./DeveloperViewComponent"
-import SearchBar from './searchBar'
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllDevelopers } from '../Redux/ActionDetails/UserActions';
+import ChatPopup from './ChatPopup';
+import { Container, Box } from '@mui/material';
+import Usercard from "./DeveloperViewComponent";
+import SearchBar from './searchBar';
 
 const Developers = () => {
+  const dispatch = useDispatch();
+  const token = localStorage.getItem('token');
+  const userId = localStorage.getItem('userId');
+  const { user } = useSelector(state => state);
+  const [getAllDeveloperList, setAllDeveloperList] = useState([]);
+  const [activeChatUser, setActiveChatUser] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
-    const dispatch = useDispatch();
-    const token = localStorage.getItem('token');
-    const userId = localStorage.getItem('userId');
-    const { user } = useSelector(state => state);
-    const [getAllDeveloperList, setAllDeveloperList] = useState([]);
-    const [activeChatUser, setActiveChatUser] = useState(null);
+  useEffect(() => {
+    dispatch(getAllDevelopers(token));
+  }, [dispatch, token]);
 
+  useEffect(() => {
+    setAllDeveloperList(user.developers || []);
+  }, [user]);
 
-    useEffect(() => {
-        dispatch(getAllDevelopers(token));
-    }, [dispatch])
+  const handleChatClick = (userId) => {
+    const user = getAllDeveloperList.find((user) => user._id === userId);
+    setActiveChatUser(user);
+  };
 
-    useEffect(() => {
-        setAllDeveloperList(user.developers || [])
-    }, [user])
+  const handleCloseChat = () => {
+    setActiveChatUser(null);
+  };
 
-    const handleChatClick = (userId) => {
-        const user = getAllDeveloperList.find((user) => user._id === userId);
-        setActiveChatUser(user);
-    };
-    const handleCloseChat = () => {
-        setActiveChatUser(null);
-    };
+  const handleSearch = (term) => {
+    setSearchTerm(term);
+  };
 
-
-    const colorStyle = { border: "2px solid black" };
+  const filteredDevelopers = getAllDeveloperList.filter(developer => {
+    const { username, firstName, email } = developer;
+    const lowercasedTerm = searchTerm?.toLowerCase();
     return (
-    <Container maxWidth="sm">
+      username?.toLowerCase().includes(lowercasedTerm) ||
+      firstName?.toLowerCase().includes(lowercasedTerm) ||
+      email?.toLowerCase().includes(lowercasedTerm)
+    );
+  });
 
-        <div>
-            <SearchBar/>
-        <div>
-            {getAllDeveloperList.filter(developer => developer._id !== userId).map(developer => (<Usercard key={developer._id} user={developer} onChatClick={handleChatClick} />))}
-        </div>
-        {activeChatUser && (
+  return (
+    <Container maxWidth="sm">
+      <SearchBar onSearch={handleSearch} />
+      <Box mt={2}>
+        {filteredDevelopers.filter(developer => developer._id !== userId).map(developer => (
+          <Usercard key={developer._id} user={developer} onChatClick={handleChatClick} />
+        ))}
+      </Box>
+      {activeChatUser && (
         <ChatPopup user={activeChatUser} onClose={handleCloseChat} />
       )}
-        </div>
     </Container>
-    )
-}
+  );
+};
 
-export default Developers
+export default Developers;
