@@ -30,7 +30,6 @@ import io from 'socket.io-client';
 
 
     useEffect(()=>{
-        console.log("okd", chatBetweenTwoUsers)
         setMessages(chatBetweenTwoUsers.chats)                
     },[userState])
 
